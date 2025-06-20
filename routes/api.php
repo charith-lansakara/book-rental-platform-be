@@ -10,3 +10,7 @@ Route::prefix('books')->group(function () {
     Route::post('/{id}/rent', [BookController::class, 'rent']);
     Route::post('/{id}/return', [BookController::class, 'return']);
 });
+
+Route::get('/test/500', function () {
+    abort(500);
+})->name('test500');
