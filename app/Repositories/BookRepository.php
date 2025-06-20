@@ -13,9 +13,11 @@ class BookRepository
         if (!empty($filters['author'])) {
             $query->where('author', 'like', '%' . $filters['author'] . '%');
         }
+        if (!empty($filters['availability'])) {
+            $query->where('is_available', $filters['availability'] === 'available');
+        }
 
-        // Return paginated result (10 per page)
-        return $query->paginate(10);
+        return $query->paginate(3);
     }
 
     public function find($id)
