@@ -17,7 +17,7 @@ class BookRepository
             $query->where('is_available', $filters['availability'] === 'available');
         }
 
-        return $query->paginate(3);
+        return $query->paginate(6);
     }
 
     public function find($id)
