@@ -53,4 +53,13 @@ class BookRepository
         $book->update(['is_available' => true]);
         return $book;
     }
+
+    public function summary()
+    {
+        return [
+            'total'     => Book::count(),
+            'available' => Book::where('is_available', 1)->count(),
+            'rented'    => Book::where('is_available', 0)->count(),
+        ];
+    }
 }

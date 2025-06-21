@@ -63,4 +63,10 @@ class BookController extends Controller
             'book' => new BookResource($book)
         ]);
     }
+
+    public function summary()
+    {
+        return response()->json($this->service->summary());
+    }
+
 }

@@ -31,4 +31,9 @@ class BookService {
     {
         return $this->repository->return($id);
     }
+
+    public function summary()
+    {
+        return $this->repository->summary();
+    }
 }

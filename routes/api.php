@@ -17,9 +17,11 @@ Route::middleware(['auth:api'])->group(function () {
 
     // Book routes accessible to both admin and user
     Route::get('/books', [BookController::class, 'index']);
+    Route::get('/books/summary', [BookController::class, 'summary']);
     Route::get('/books/{id}', [BookController::class, 'show']);
     Route::post('/books/{id}/rent', [BookController::class, 'rent']);
     Route::post('/books/{id}/return', [BookController::class, 'return']);
+    
 
     // Book routes accessible to admin only
     Route::middleware('role:admin')->group(function () {
