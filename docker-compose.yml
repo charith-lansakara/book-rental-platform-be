@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: book_rental_app
+    volumes:
+      - ./:/var/www
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    networks:
+      - book_rental_net
+
+  db:
+    image: mysql:8.3
+    container_name: book_rental_db
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: book_rental_platform
+      MYSQL_USER: book_user
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: rootsecret
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - book_rental_net
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: book_rental_phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootsecret
+    depends_on:
+      - db
+    networks:
+      - book_rental_net
+
+networks:
+  book_rental_net:
+
+volumes:
+  db_data:
