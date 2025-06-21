@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
-            $table->date('published_date');
+            $table->date('published_date')->nullable();
             $table->boolean('is_available')->default(true);
             $table->timestamps();
         });
